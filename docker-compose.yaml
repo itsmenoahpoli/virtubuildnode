@@ -1,18 +1,4 @@
-version: "3.8"
-
 services:
-  app:
-    build: .
-    container_name: virtubuildnodeapp
-    ports:
-      - "9000:9000"
-    env_file:
-      - .env
-    depends_on:
-      - postgres
-    networks:
-      - app-network
-
   postgres:
     image: postgres:13
     container_name: virtubuildpostgres
@@ -26,6 +12,24 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+
+  app:
+    build: .
+    container_name: virtubuildnodeapp
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - app-network
 

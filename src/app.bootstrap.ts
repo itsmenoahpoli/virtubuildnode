@@ -34,7 +34,7 @@ const runApp = (): void => {
     return;
   }
 
-  app.listen(appPort, () => {
+  app.listen(appPort, "0.0.0.0", () => {
     if (SETTINGS.APP_ENV === AppEnvironments.DEV) {
       console.info(`[APP]: App started and running in ${SETTINGS.APP_URL}`);
     }

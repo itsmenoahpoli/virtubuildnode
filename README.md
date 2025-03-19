@@ -1,7 +1,7 @@
 <h3>Setup & installation guide</h3>
-We utilize docker
+Docker must be installed in your machine.
 
 ```
-
+docker compose up --build
 
 ```
