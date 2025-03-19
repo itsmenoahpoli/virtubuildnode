@@ -2,7 +2,7 @@
 Docker must be installed in your machine.
 
 ```bash
-git clone git@github.com:itsmenoahpoli/virtubuildnode.git
+git clone https://github.com/itsmenoahpoli/virtubuildnode.git
 
 cd virtubuildnode
 
