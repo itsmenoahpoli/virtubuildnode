@@ -1,7 +1,15 @@
 <h3>Setup & installation guide</h3>
 Docker must be installed in your machine.
 
-```
-docker compose up --build
+```bash
+git clone git@github.com:itsmenoahpoli/virtubuildnode.git
+
+cd virtubuildnode
+
+cp .env.example .env
+
+npm install
+
+docker compose up --build # After running, please check the docker dashboard
 
 ```
