@@ -20,6 +20,39 @@ export class AuthController extends BaseController {
     this.bindClassMethods(this);
   }
 
+  /**
+   * @swagger
+   * /auth/signin:
+   *   post:
+   *     summary: Sign in user
+   *     description: Authenticate user with email and password
+   *     tags: [Authentication]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/SigninCredentials'
+   *     responses:
+   *       200:
+   *         description: User successfully authenticated
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/SuccessResponse'
+   *       401:
+   *         description: Invalid credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *       422:
+   *         description: Validation error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   */
   @ValidatePayload(SigninCredentialsDTO)
   public async signinHandler(
     request: Request,
@@ -41,6 +74,33 @@ export class AuthController extends BaseController {
     return this.sendHttpResponse(response, result, HttpStatusCode.OK);
   }
 
+  /**
+   * @swagger
+   * /auth/signup:
+   *   post:
+   *     summary: Sign up new user
+   *     description: Create a new user account
+   *     tags: [Authentication]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/SignupData'
+   *     responses:
+   *       201:
+   *         description: User successfully created
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/SuccessResponse'
+   *       422:
+   *         description: User already exists or validation error
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   */
   @ValidatePayload(SignupDataDTO)
   public async signupHandler(
     request: Request,

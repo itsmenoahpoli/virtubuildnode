@@ -9,7 +9,10 @@ const createDatabaseIfNotExists = async () => {
     port: Number(SETTINGS.APP_DB_PORT),
     username: SETTINGS.APP_DB_USERNAME,
     password: SETTINGS.APP_DB_PASSWORD,
-    database: "postgres",
+    database: SETTINGS.APP_DB_TYPE,
+    extra: {
+      charset: "utf8mb4",
+    },
   } as DataSourceOptions);
 
   try {
@@ -35,6 +38,9 @@ const DBDataSource = new DataSource({
   entities: [__dirname + "/entities/*.entity.ts"],
   migrations: [__dirname + "/migrations/*.migration.ts"],
   subscribers: [],
+  extra: {
+    charset: "utf8mb4",
+  },
 } as DataSourceOptions);
 
 let usersRepository: Repository<UserEntity>;

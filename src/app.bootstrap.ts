@@ -10,6 +10,11 @@ import {
 import { initializeDatabase } from "@/database";
 import { SETTINGS } from "@/configs";
 import { AppEnvironments } from "@/types";
+import {
+  swaggerSpec,
+  swaggerUi,
+  swaggerUiOptions,
+} from "@/configs/swagger.config";
 
 dotenv.config();
 
@@ -21,6 +26,13 @@ app.use(cors());
 app.disable("powered-by");
 
 initializeMiddlewares(app);
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
+);
+
 initializeApiRoutes(app);
 initializeDatabase();
 
@@ -37,6 +49,9 @@ const runApp = (): void => {
   app.listen(appPort, "0.0.0.0", () => {
     if (SETTINGS.APP_ENV === AppEnvironments.DEV) {
       console.info(`[APP]: App started and running in ${SETTINGS.APP_URL}`);
+      console.info(
+        `[SWAGGER]: API documentation available at ${SETTINGS.APP_URL}/api-docs`
+      );
     }
   });
 };
