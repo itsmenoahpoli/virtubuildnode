@@ -1,5 +1,10 @@
 import { DataSource, Repository, type DataSourceOptions } from "typeorm";
-import { User as UserEntity, UserRole as UserRoleEntity } from "./entities";
+import {
+  User as UserEntity,
+  UserRole as UserRoleEntity,
+  Quiz as QuizEntity,
+  QuizSubmission as QuizSubmissionEntity,
+} from "./entities";
 import { SETTINGS } from "@/configs";
 
 const createDatabaseIfNotExists = async () => {
@@ -45,6 +50,8 @@ const DBDataSource = new DataSource({
 
 let usersRepository: Repository<UserEntity>;
 let userRolesRepository: Repository<UserRoleEntity>;
+let quizzesRepository: Repository<QuizEntity>;
+let quizSubmissionsRepository: Repository<QuizSubmissionEntity>;
 
 const initializeDatabase = async () => {
   await createDatabaseIfNotExists();
@@ -54,6 +61,9 @@ const initializeDatabase = async () => {
       console.info("Database successfully synced!");
       usersRepository = DBDataSource.getRepository(UserEntity);
       userRolesRepository = DBDataSource.getRepository(UserRoleEntity);
+      quizzesRepository = DBDataSource.getRepository(QuizEntity);
+      quizSubmissionsRepository =
+        DBDataSource.getRepository(QuizSubmissionEntity);
     })
     .catch((error) => {
       console.error("Failed to sync database");
@@ -68,4 +78,8 @@ export {
   UserEntity,
   userRolesRepository,
   UserRoleEntity,
+  quizzesRepository,
+  QuizEntity,
+  quizSubmissionsRepository,
+  QuizSubmissionEntity,
 };
