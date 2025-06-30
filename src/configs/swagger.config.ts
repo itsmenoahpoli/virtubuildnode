@@ -273,6 +273,80 @@ const swaggerOptions = {
             },
           },
         },
+        Assessment: {
+          type: "object",
+          properties: {
+            id: {
+              type: "integer",
+              description: "Assessment ID",
+            },
+            instructor_id: {
+              type: "integer",
+              description: "ID of the instructor who created the assessment",
+            },
+            title: {
+              type: "string",
+              description: "Title of the assessment",
+            },
+            description: {
+              type: "string",
+              description: "Description of the assessment",
+            },
+            questions: {
+              type: "array",
+              items: {
+                type: "object",
+                required: ["question", "type", "correct_answer"],
+                properties: {
+                  question: {
+                    type: "string",
+                    description: "The question text",
+                  },
+                  type: {
+                    type: "string",
+                    enum: ["enumeration", "multiple_choices"],
+                    description: "Type of question",
+                  },
+                  correct_answer: {
+                    type: "string",
+                    description: "The correct answer",
+                  },
+                  choices: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        choice: {
+                          type: "string",
+                          enum: ["a", "b", "c", "d"],
+                          description: "Multiple choice option",
+                        },
+                      },
+                    },
+                    description:
+                      "Multiple choice options (only for multiple_choices type)",
+                  },
+                },
+              },
+              description: "Array of assessment questions",
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              description: "Assessment creation timestamp",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              description: "Assessment last update timestamp",
+            },
+            deletedAt: {
+              type: "string",
+              format: "date-time",
+              description: "Assessment deletion timestamp (for soft deletes)",
+            },
+          },
+        },
         QuizSubmission: {
           type: "object",
           properties: {

@@ -4,6 +4,7 @@ import {
   UserRole as UserRoleEntity,
   Quiz as QuizEntity,
   QuizSubmission as QuizSubmissionEntity,
+  Assessment as AssessmentEntity,
 } from "./entities";
 import { SETTINGS } from "@/configs";
 
@@ -52,6 +53,7 @@ let usersRepository: Repository<UserEntity>;
 let userRolesRepository: Repository<UserRoleEntity>;
 let quizzesRepository: Repository<QuizEntity>;
 let quizSubmissionsRepository: Repository<QuizSubmissionEntity>;
+let assessmentsRepository: Repository<AssessmentEntity>;
 
 const initializeDatabase = async () => {
   await createDatabaseIfNotExists();
@@ -64,6 +66,7 @@ const initializeDatabase = async () => {
       quizzesRepository = DBDataSource.getRepository(QuizEntity);
       quizSubmissionsRepository =
         DBDataSource.getRepository(QuizSubmissionEntity);
+      assessmentsRepository = DBDataSource.getRepository(AssessmentEntity);
     })
     .catch((error) => {
       console.error("Failed to sync database");
@@ -82,4 +85,6 @@ export {
   QuizEntity,
   quizSubmissionsRepository,
   QuizSubmissionEntity,
+  assessmentsRepository,
+  AssessmentEntity,
 };

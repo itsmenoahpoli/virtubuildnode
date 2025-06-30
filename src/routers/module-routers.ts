@@ -4,3 +4,4 @@ export { UserRolesRouter } from "@/modules/user-roles/user-roles.router";
 export { UsersRouter } from "@/modules/users/users.router";
 export { QuizzesRouter } from "@/modules/quizzes/quizzes.router";
 export { QuizSubmissionsRouter } from "@/modules/quiz-submissions/quiz-submissions.router";
+export { AssessmentsRouter } from "@/modules/assessments/assessments.router";

@@ -6,6 +6,7 @@ import {
   UsersRouter,
   QuizzesRouter,
   QuizSubmissionsRouter,
+  AssessmentsRouter,
 } from "./module-routers";
 import { SETTINGS } from "@/configs";
 import { AppEnvironments } from "@/types";
@@ -34,6 +35,10 @@ const routesConfig = [
   {
     uri: "/quiz-submissions",
     router: new QuizSubmissionsRouter().routerRoutes,
+  },
+  {
+    uri: "/assessments",
+    router: new AssessmentsRouter().routerRoutes,
   },
 ];
 
